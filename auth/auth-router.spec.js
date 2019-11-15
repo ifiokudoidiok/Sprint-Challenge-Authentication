@@ -23,7 +23,7 @@ describe("users model", () => {
       expect(users).toHaveLength(2);
     });
 
-    it("should not post user with an existing name", async () => {
+    it("should not create user with an existing name", async () => {
       try {
         await Users.register({
           username: "paco",
