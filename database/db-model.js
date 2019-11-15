@@ -14,7 +14,8 @@ function register(user) {
         return findById(id);
     })
 } 
-function login() {
+function login(user) {
+    return db("users").where(user);
 
 } 
 function findById(id) {
