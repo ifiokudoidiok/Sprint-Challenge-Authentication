@@ -53,7 +53,7 @@ describe("users model", () => {
       return request(server)
         .post("/api/auth/login")
         .then(response => {
-          expect(response.status).toBe(500);
+          expect(response.status).toBe(400);
         });
     });
 
@@ -63,7 +63,17 @@ describe("users model", () => {
         password: "1234"
       });
 
-      expect(response.status).toBe(500);
+      expect(response.status).toBe(400);
+    });
+  });
+
+ 
+  describe("jokes endpoint", () => {
+    test("Should return 400 when no token provided", async () => {
+      const response = await request(server).get("/api/jokes");
+      expect(response.status).toBe(400);
     });
   });
 });
+
+
