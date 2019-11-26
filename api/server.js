@@ -12,7 +12,19 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use('/api/auth', authRouter);
-server.use('/api/jokes', authenticate, jokesRouter);
+server.get('/', logger, (req, res) => {
+    res.send('<h1>Wanna Read a Joke? Sign-in/Log-in to gain access</h1><br/><h5>(/api/auth/register OR /api/auth/login)</h5>')
+})
+
+server.use('/api/auth',logger, authRouter);
+server.use('/api/jokes',logger, authenticate, jokesRouter);
+
+function logger(req, res, next) {
+    console.log(
+      `[${new Date().toISOString()}] ${req.method} to ${req.url} from ${req.host}`
+    );
+  
+    next();
+  }
 
 module.exports = server;
